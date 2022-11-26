@@ -3,13 +3,13 @@ from random import randint
 
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 from PyQt5.QtGui import QColor, QPainter, QFont
-from PyQt5 import uic
+from Ui import Ui_Form
 
 
-class Example(QWidget):
+class Example(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Ui.ui', self)
+        self.setupUi(self)
         self.setWindowTitle('random ellipse')
 
         self.Paint = False
@@ -40,7 +40,7 @@ class Example(QWidget):
         if self.Paint:
             qp = QPainter()
             qp.begin(self)
-            qp.setBrush(QColor(255, 255, 0))
+            qp.setBrush(QColor(randint(1, 255), randint(1, 255), randint(1, 255)))
             qp.drawEllipse(self.coords[0], self.coords[1], self.length, self.high)
             qp.end()
 
