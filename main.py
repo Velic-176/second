@@ -3,21 +3,16 @@ from random import randint
 
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 from PyQt5.QtGui import QColor, QPainter, QFont
+from PyQt5 import uic
+
 
 class Example(QWidget):
     def __init__(self):
         super().__init__()
-        self.setGeometry(1300, 300, 500, 500)
+        uic.loadUi('Ui.ui', self)
         self.setWindowTitle('random ellipse')
 
         self.Paint = False
-
-        self.btn = QPushButton(self)
-        self.btn.setGeometry(200, 230, 100, 40)
-        font = QFont()
-        font.setPointSize(10)
-        self.btn.setFont(font)
-        self.btn.setText('Push me!')
 
         self.btn.clicked.connect(self.spawn_ellipse)
 
@@ -39,7 +34,6 @@ class Example(QWidget):
                 Right = True
             else:
                 coords = (randint(1, 500 - x), randint(1, 500 - y))
-        print(coords)
         return x, y, coords
 
     def paintEvent(self, event):
